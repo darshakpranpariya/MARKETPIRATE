@@ -1,4 +1,6 @@
 # Imported all necessary libraries here.
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
 import pylab
 import scipy.stats as stats
 import datetime as dt
@@ -11,14 +13,12 @@ sns.set(style="darkgrid")
 
 pd.pandas.set_option('display.max_columns', None)
 
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import mean_absolute_error
 
 # Drop specific columns name from the dataframe
 
 
-def drop_column_from_df(dataframe_name, column_name):
-    return dataframe_name.drop([column_name], axis=1)
+def drop_column_from_df(dataframe_name, list_column_name):
+    return dataframe_name.drop(list_column_name, axis=1)
 
 # First of let combine day,month, year column and convert that into datetime format.
 # This function is call by reference.
@@ -209,9 +209,21 @@ def outlier_detection_std(df, column):
 def make_csv_file(df_name, file_name):
     df_name.to_csv(file_name, index=False)
 
+
+# Mean Squared Error, Root Mean Squared Error, Mean Absolute Error:
+#     Mean Squared Error, or MSE for short, is a popular error metric for regression problems.
+
+#     It is also an important loss function for algorithms fit or optimized using the least squares framing of a regression problem. Here “least squares” refers to minimizing the mean squared error between predictions and expected values.
+
+#     The MSE is calculated as the mean or average of the squared differences between predicted and expected target values in a dataset.
+
+#     MSE = 1 / N * sum for i to N (y_i – yhat_i)^2
+
+#     Where y_i is the i’th expected value in the dataset and yhat_i is the i’th predicted value. The difference between these two values is squared, which has the effect of removing the sign, resulting in a positive error value.
+
 # Return mean_squared_error, root_mean_squared_error, and mean_absolute_error.
-def calculate_mse_rmse_mae(y_actual,y_predicted):
+def calculate_mse_rmse_mae(y_actual, y_predicted):
     mse_errors = mean_squared_error(y_actual, y_predicted)
     rmse_errors = mean_squared_error(y_actual, y_predicted, squared=False)
     mae_errors = mean_absolute_error(y_actual, y_predicted)
-    return mse_errors,rmse_errors,mae_errors
+    return mse_errors, rmse_errors, mae_errors
