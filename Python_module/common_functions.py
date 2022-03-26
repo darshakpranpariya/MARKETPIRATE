@@ -7,6 +7,7 @@ import datetime as dt
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import seaborn as sns
 sns.set(style="darkgrid")
 # Display all the columns of the dataframe
